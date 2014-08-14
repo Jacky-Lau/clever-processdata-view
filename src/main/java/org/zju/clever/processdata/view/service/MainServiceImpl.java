@@ -216,7 +216,7 @@ public class MainServiceImpl implements MainService {
 				.collect(Collectors.toList());
 	}
 
-	@Cacheable(value = "actionDictCache", key = "'#type'")
+	@Cacheable(value = "actionDictCache", key = "#type")
 	private Map<Integer, String> getActionDictByType(String type) {
 		Map<String, String> model = new HashMap<String, String>();
 		model.put("codeType", type);
