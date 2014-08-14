@@ -4,9 +4,16 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+@Entity
+@Table(name = "MASTER_PATIENT_INDEX")
+@DynamicUpdate(true)
 public class PatientIndex implements Serializable {
 
 	/**

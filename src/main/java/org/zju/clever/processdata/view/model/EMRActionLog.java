@@ -36,7 +36,7 @@ public class EMRActionLog implements Serializable {
 	private Integer emrHistroyId;
 
 	@Column(name = "ACTOR_NAME")
-	private String actionName;
+	private String actorName;
 
 	@Column(name = "ACTOR_CODE")
 	private String actionCode;
@@ -71,12 +71,12 @@ public class EMRActionLog implements Serializable {
 		this.actionCode = actionCode;
 	}
 
-	public String getActionName() {
-		return actionName;
+	public String getActorName() {
+		return actorName;
 	}
 
-	public void setActionName(String actionName) {
-		this.actionName = actionName;
+	public void setActorName(String actorName) {
+		this.actorName = actorName;
 	}
 
 	public Integer getEmrHistroyId() {

@@ -24,6 +24,23 @@
 		<context:exclude-filter type="regex"
 			expression="org.zju.clever.processdata.view.controller.*" />
 	</context:component-scan>
+	
+	<!-- spring cache start -->
+	<cache:annotation-driven cache-manager="cacheManager"/> 
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">  
+	    <property name="caches">  
+	        <set>  
+	            <bean  
+	                class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  
+	                p:name="default" />  
+	            <bean  
+	                class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  
+	                p:name="actionDictCache" /> 
+	        </set>  
+	    </property>   
+    </bean> 
+	<!-- spring cache end -->
+	
 
 	<!-- hibernate start -->
 	<bean id="c3p0DataSource" destroy-method="close"

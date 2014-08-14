@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity 
 @Table(name="EXAM_ACTION")
 @DynamicUpdate(true)
-public class ExamAction implements Serializable, Action {
+public class ExamAction implements Serializable {
 
 	/**
 	 * 

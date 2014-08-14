@@ -2,10 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html>
 	<head>
 		<title>CLEVER系统 - 过程数据</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link type="text/css" rel="stylesheet" href="http://misc.360buyimg.com/lib/skin/2013/base.css">
 	</head>
 	<body myjd="_MYJD_ordercenter">
@@ -19,23 +20,7 @@ pageEncoding="UTF-8"%>
 			<div class="m" id="orderstate">
 				<div class="mt">
 					<strong>检查申请单号：1638734402&nbsp;&nbsp;&nbsp;&nbsp;状态：<span class="ftx14">检查完成</span><span id="pay-button-1638734402"></span> </strong>
-
 				</div>
-
-				<div class="mc" id="zxzf" style="display:none">
-					<div>
-						<p style="text-align:left;">
-							尊敬的客户，您的订单商品已经从库房发出，请您做好收货准备。
-						</p>
-						<p style="text-align:left;">
-							<span class="ftx-01">由京东提供</span>
-							<s class="icon-bao"></s>
-							<a target="_blank" href="http://help.jd.com/help/question-56.html#help1995">在线交易保障</a>
-							<span>如果您已收到货，请确认收货，京东将与卖家结算。如果您对购买的商品不满意，您可在确认收货后发起返修/退换货申请!</span>
-						</p>
-					</div>
-				</div>
-
 			</div>
 
 			<div id="hbdd" class="Tip360" style="width: 600px;">
@@ -75,120 +60,40 @@ pageEncoding="UTF-8"%>
 			<!--进度条-->
 
 			<div id="process" class="section4">
-				<div class="node fore ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-						<li class="tx2">
-							提交申请
-						</li>
-						<li id="track_time_0" class="tx3">
-							2014-07-13
-							<br>
-							00:19:32
-						</li>
-					</ul>
-				</div>
-				<div class="proce ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-					</ul>
-				</div>
-				<div class="node ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-						<li class="tx2">
-							校对发送申请
-						</li>
-						<li id="track_time_4" class="tx3">
-							2014-07-13
-							<br>
-							00:19:33
-						</li>
-					</ul></li></ul>
-				</div>
-				<div class="proce ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-					</ul>
-				</div>
-				<div class="node ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-						<li class="tx2">
-							检查开始
-						</li>
-						<li id="track_time_1" class="tx3">
-							2014-07-13
-							<br>
-							09:49:36
-						</li>
-					</ul>
-				</div>
-				<div class="proce ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-					</ul>
-				</div>
-				<div class="node ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-						<li class="tx2">
-							图像就绪
-						</li>
-						<li id="track_time_5" class="tx3">
-							2014-07-13
-							<br>
-							11:12:30
-						</li>
-					</ul>
-				</div>
-				<div class="proce ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-					</ul>
-				</div>
-				<div class="node ready">
-					<ul>
-						<li class="tx1">
-							&nbsp;
-						</li>
-						<li class="tx2">
-							最终报告
-						</li>
-						<li id="track_time_6" class="tx3">
-							2014-07-13
-							<br>
-							16:24:33
-						</li>
-					</ul>
-				</div>
+				<c:forEach var="action" items="${actions}" varStatus="index">
+					<div class="node ready" style="height: 100px;">
+						<ul>
+							<li class="tx1">
+								&nbsp;
+							</li>
+							<li class="tx2">
+								${action.actionName}
+							</li>
+							<li id="track_time_4" class="tx3">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${action.actionDateTime.time}"/>
+								<br>
+								<fmt:formatDate pattern="HH:mm:ss" value="${action.actionDateTime.time}"/>
+							</li>
+						</ul>
+					</div>
+					<c:if test="${index.index != actions.size() - 1}">
+						<div class="proce ready">
+							<ul>
+								<li class="tx1">
+									&nbsp;
+								</li>
+							</ul>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 
+			<br />
 			<!--跟踪、付款信息、gis-->
 			<div class="m" id="ordertrack">
 				<ul class="tab">
 					<li class="curr" clstag="click|keycount|orderinfo|ordertrack">
 						<h2> 数据跟踪</h2>
-					</li>
-
-					<li id="orderlocustab" style="display:none;" clstag="click|keycount|orderinfo|btn_gis">
-						<h2> 订单轨迹</h2>
 					</li>
 				</ul>
 				<div class="clr"></div>
@@ -206,26 +111,11 @@ pageEncoding="UTF-8"%>
 						<tbody>
 							<c:forEach var="action" items="${actions}">
 								<tr>
-									<td>2014-07-13 00:19:32</td><td>提交申请</td><td>姚成福</td>
+									<td>
+									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${action.actionDateTime.time}"/>
+									</td><td>${action.actionName}</td><td>${action.actorName}</td>
 								</tr>
 							</c:forEach>
-							<tr>
-								<td>2014-07-13 00:19:32</td><td>提交申请</td><td>姚成福</td>
-							</tr>
-							<tr>
-								<td>2014-07-13 00:41:08</td>
-								<td>校对发送申请</td><td>王艳红</td>
-							</tr>
-							<tr>
-								<td>2014-07-13 04:02:45</td><td>检查开始</td>
-								<td>陈恩么</td>
-							</tr>
-							<tr>
-								<td>2014-07-13 04:15:34</td><td>图像就绪</td><td>章泽天</td>
-							</tr>
-							<tr>
-								<td>2014-07-13 09:33:02</td><td>最终报告</td><td>红小兵</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -251,10 +141,17 @@ pageEncoding="UTF-8"%>
 									病人姓名：${patientIndex.name}
 								</li>
 								<li>
-									性&nbsp;&nbsp;&nbsp;&nbsp;别：${patientIndex.gender}
+									性&nbsp;&nbsp;&nbsp;&nbsp;别：
+									<c:if test="${patientIndex.gender == 'F'}">
+										女
+									</c:if>
+									<c:if test="${patientIndex.gender == 'M'}">
+										男
+									</c:if>
 								</li>
 								<li>
-									出生日期：${patientIndex.dateOfBirth}
+									出生日期：
+									<fmt:formatDate pattern="yyyy-MM" value="${patientIndex.dateOfBirth.time}"/>
 								</li>
 							</ul>
 						</dd>
