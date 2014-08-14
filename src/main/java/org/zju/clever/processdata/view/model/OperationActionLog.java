@@ -23,6 +23,20 @@ public class OperationActionLog implements Serializable {
 	@Column(name = "SERIAL_NO")
 	private Integer serialNo;
 
+	private String operationReqId;
+
+	private String operationId;
+
+	private String actorId;
+
+	private String actorName;
+
+	private Calendar actionDateime;
+
+	private String actionTypeId;
+
+	private String actionMemo;
+	
 	public Integer getSerialNo() {
 		return serialNo;
 	}
@@ -87,19 +101,6 @@ public class OperationActionLog implements Serializable {
 		this.actorName = actorName;
 	}
 
-	private String operationReqId;
-
-	private String operationId;
-
-	private String actorId;
-
-	private String actorName;
-
-	private Calendar actionDateime;
-
-	private String actionTypeId;
-
-	private String actionMemo;
 
 	@Override
 	public boolean equals(Object obj) {
