@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "PRESC_ACTION_LOG")
 public class PrescActionLog implements Serializable {
 
 	/**
@@ -19,8 +23,8 @@ public class PrescActionLog implements Serializable {
 	@Column(name = "ACTION_ID")
 	private Integer actionId;
 
-	@Column(name = "ORDER_ID")
-	private Integer orderId;
+	@Column(name = "PRESC_ID")
+	private Integer prescId;
 
 	@Column(name = "ACTOR_NAME")
 	private String actorName;
@@ -45,12 +49,12 @@ public class PrescActionLog implements Serializable {
 		this.actionId = actionId;
 	}
 
-	public Integer getOrderId() {
-		return orderId;
+	public Integer getPrescId() {
+		return prescId;
 	}
 
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+	public void setPrescId(Integer prescId) {
+		this.prescId = prescId;
 	}
 
 	public String getActorName() {

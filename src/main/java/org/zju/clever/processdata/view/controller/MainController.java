@@ -29,10 +29,14 @@ public class MainController {
 		String indexName = "";
 		String finalState = "";
 		List<Action> actions = new ArrayList<Action>();
-		if (dataType == "emr") {
+		if (dataType.equals("emr")) {
 			type = "EMR";
+			indexName = "病例文档号";
+			actions = this.mainService.getEMRActions(dataIndex);
 		} else if (dataType.equals("firstpage")) {
 			type = "病案首页";
+			indexName = "病案首页号";
+			actions = this.mainService.getEMRFirstPageActions(dataIndex);
 		} else if (dataType.equals("exam")) {
 			type = "检查";
 			indexName = "检查申请单号";
@@ -43,12 +47,16 @@ public class MainController {
 			actions = this.mainService.getLabTestActions(dataIndex);
 		} else if (dataType.equals("operation")) {
 			type = "手术";
+			indexName = "手术申请号";
+			actions = this.mainService.getOperationActions(dataIndex);
 		} else if (dataType.equals("order")) {
 			type = "医嘱";
 			indexName = "医嘱号";
 			actions = this.mainService.getOrderActions(dataIndex);
 		} else if (dataType.equals("presc")) {
 			type = "处方";
+			indexName = "处方号";
+			actions = this.mainService.getPrescActions(dataIndex);
 		} else {
 			throw new Exception("Data type " + dataType + " is not supported.");
 		}

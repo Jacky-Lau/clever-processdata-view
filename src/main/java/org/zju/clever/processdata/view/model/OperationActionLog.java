@@ -28,7 +28,7 @@ public class OperationActionLog implements Serializable {
 
 	@Column(name = "OPERATION_ID")
 	private String operationId;
-	
+
 	@Column(name = "ACTOR_ID")
 	private String actorId;
 
@@ -36,14 +36,14 @@ public class OperationActionLog implements Serializable {
 	private String actorName;
 
 	@Column(name = "ACTION_DATE_TIME")
-	private Calendar actionDateime;
+	private Calendar actionDateTime;
 
 	@Column(name = "ACTION_TYPE_ID")
 	private String actionTypeId;
 
 	@Column(name = "ACTION_MEMO")
 	private String actionMemo;
-	
+
 	public Integer getSerialNo() {
 		return serialNo;
 	}
@@ -76,12 +76,12 @@ public class OperationActionLog implements Serializable {
 		this.actorId = actorId;
 	}
 
-	public Calendar getActionDateime() {
-		return actionDateime;
+	public Calendar getActionDateTime() {
+		return actionDateTime;
 	}
 
-	public void setActionDateime(Calendar actionDateime) {
-		this.actionDateime = actionDateime;
+	public void setActionDateTime(Calendar actionDateTime) {
+		this.actionDateTime = actionDateTime;
 	}
 
 	public String getActionTypeId() {
@@ -107,7 +107,6 @@ public class OperationActionLog implements Serializable {
 	public void setActorName(String actorName) {
 		this.actorName = actorName;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
