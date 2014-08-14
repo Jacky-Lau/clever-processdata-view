@@ -23,18 +23,25 @@ public class OperationActionLog implements Serializable {
 	@Column(name = "SERIAL_NO")
 	private Integer serialNo;
 
+	@Column(name = "OPERATION_REQ_ID")
 	private String operationReqId;
 
+	@Column(name = "OPERATION_ID")
 	private String operationId;
-
+	
+	@Column(name = "ACTOR_ID")
 	private String actorId;
 
+	@Column(name = "ACTOR_NAME")
 	private String actorName;
 
+	@Column(name = "ACTION_DATE_TIME")
 	private Calendar actionDateime;
 
+	@Column(name = "ACTION_TYPE_ID")
 	private String actionTypeId;
 
+	@Column(name = "ACTION_MEMO")
 	private String actionMemo;
 	
 	public Integer getSerialNo() {
