@@ -8,8 +8,12 @@ import org.zju.clever.processdata.view.model.PatientIndex;
 
 public interface MainService {
 
-	public PatientIndex getPatientDetails(String id);
+	public PatientIndex getPatientIndexById(String id);
 
 	public List<Action> getExamActions(String id);
+
+	public List<Action> getLabTestActions(String id);
+
+	public List<Action> getOrderActions(String id);
 
 }

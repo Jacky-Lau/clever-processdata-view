@@ -12,10 +12,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zju.clever.processdata.view.dao.ActionClinicDictDao;
 import org.zju.clever.processdata.view.dao.ExamActionDao;
+import org.zju.clever.processdata.view.dao.LabTestActionLogDao;
+import org.zju.clever.processdata.view.dao.OperationActionLogDao;
+import org.zju.clever.processdata.view.dao.OrderActionLogDao;
 import org.zju.clever.processdata.view.dao.PatientIndexDao;
 import org.zju.clever.processdata.view.entity.Action;
 import org.zju.clever.processdata.view.model.ActionClinicDict;
 import org.zju.clever.processdata.view.model.ExamAction;
+import org.zju.clever.processdata.view.model.LabTestActionLog;
+import org.zju.clever.processdata.view.model.OrderActionLog;
 import org.zju.clever.processdata.view.model.PatientIndex;
 
 @Service("mainService")
@@ -28,9 +33,15 @@ public class MainServiceImpl implements MainService {
 	private ExamActionDao examActionDao;
 	@Resource(name = "actionClinicDictDao")
 	private ActionClinicDictDao actionClinicDictDao;
+	@Resource(name = "labTestActionLogDao")
+	private LabTestActionLogDao labTestActionLogDao;
+	@Resource(name = "operationActionLogDao")
+	private OperationActionLogDao operationActionLogDao;
+	@Resource(name="orderActionLogDao")
+	private OrderActionLogDao orderActionLogDao;
 
 	@Override
-	public PatientIndex getPatientDetails(String id) {
+	public PatientIndex getPatientIndexById(String id) {
 		return this.patientIndexDao.findUniqueByProperty("patientId", id);
 	}
 
@@ -48,11 +59,59 @@ public class MainServiceImpl implements MainService {
 					Action action = new Action();
 					action.setActionId(exam.getSerialNo());
 					action.setActionDateTime(exam.getActionDateTime());
-					action.setActionName(this.getActionDictByType("检查").get(
+					action.setActionType(this.getActionDictByType("检查").get(
 							Integer.valueOf(exam.getActionTypeId())));
 					action.setActorName(exam.getActorName());
 					return action;
-				}).collect(Collectors.toList());
+				})
+				.sorted((action1, action2) -> Integer.compare(
+						action1.getActionId(), action2.getActionId()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Action> getLabTestActions(String id) {
+		Map<String, String> model = new HashMap<String, String>();
+		model.put("testReqId", id);
+		List<LabTestActionLog> logs = this.labTestActionLogDao.findByHQL(
+				"from LabTestActionLog log where log.testReqId = :testReqId",
+				model);
+		return logs
+				.stream()
+				.map(log -> {
+					Action action = new Action();
+					action.setActionId(log.getSerialNo());
+					action.setActionDateTime(log.getActionDateTime());
+					action.setActionType(this.getActionDictByType("检验").get(
+							Integer.valueOf(log.getActionTypeId())));
+					action.setActorName(log.getActorName());
+					return action;
+				})
+				.sorted((action1, action2) -> Integer.compare(
+						action1.getActionId(), action2.getActionId()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Action> getOrderActions(String id) {
+		Map<String, Integer> model = new HashMap<String, Integer>();
+		model.put("orderId", Integer.valueOf(id));
+		List<OrderActionLog> logs = this.orderActionLogDao.findByHQL(
+				"from OrderActionLog log where log.orderId = :orderId",
+				model);
+		return logs
+				.stream()
+				.map(log -> {
+					Action action = new Action();
+					action.setActionId(log.getActionId());
+					action.setActionDateTime(log.getActionDateTime());
+					action.setActionType(log.getActionType());
+					action.setActorName(log.getActorName());
+					return action;
+				})
+				.sorted((action1, action2) -> Integer.compare(
+						action1.getActionId(), action2.getActionId()))
+				.collect(Collectors.toList());
 	}
 
 	@Cacheable(value = "actionDictCache", key = "#type")

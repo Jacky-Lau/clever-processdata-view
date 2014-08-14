@@ -12,14 +12,14 @@ pageEncoding="UTF-8"%>
 	<body myjd="_MYJD_ordercenter">
 		<div class="w">
 			<div class="breadcrumb">
-				<strong><a href="http://home.jd.com/">过程数据</a></strong><span>&nbsp;&gt;&nbsp;<a href="http://jd2008.jd.com/JdHome/OrderList.aspx">检查</a>&nbsp;&gt;&nbsp;检查申请单号：ER4567<span></span></span>
+				<strong><a href="http://home.jd.com/">过程数据</a></strong><span>&nbsp;&gt;&nbsp;<a href="http://jd2008.jd.com/JdHome/OrderList.aspx">${type}</a>&nbsp;&gt;&nbsp;${indexName}：${dataIndex}<span></span></span>
 			</div>
 			<!--变量-->
 			<span id="pay-button-order" style="display:none"></span>
 			<!--状态、提示-->
 			<div class="m" id="orderstate">
 				<div class="mt">
-					<strong>检查申请单号：1638734402&nbsp;&nbsp;&nbsp;&nbsp;状态：<span class="ftx14">检查完成</span><span id="pay-button-1638734402"></span> </strong>
+					<strong>${indexName}：${dataIndex}&nbsp;&nbsp;&nbsp;&nbsp;状态：<span class="ftx14">${finalState}</span><span id="pay-button-1638734402"></span> </strong>
 				</div>
 			</div>
 
@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
 								&nbsp;
 							</li>
 							<li class="tx2">
-								${action.actionName}
+								${action.actionType}
 							</li>
 							<li id="track_time_4" class="tx3">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${action.actionDateTime.time}"/>
@@ -113,7 +113,7 @@ pageEncoding="UTF-8"%>
 								<tr>
 									<td>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${action.actionDateTime.time}"/>
-									</td><td>${action.actionName}</td><td>${action.actorName}</td>
+									</td><td>${action.actionType}</td><td>${action.actorName}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -167,11 +167,11 @@ pageEncoding="UTF-8"%>
 							<ul>
 
 								<li>
-									数据类别：电子检查
+									数据类别：${type}
 								</li>
 
 								<li>
-									数据索引：ER45355
+									数据索引：${dataIndex}
 								</li>
 							</ul>
 						</dd>

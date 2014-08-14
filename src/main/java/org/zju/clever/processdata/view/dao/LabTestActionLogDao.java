@@ -1,5 +1,7 @@
 package org.zju.clever.processdata.view.dao;
 
-public interface LabTestActionLogDao extends GenericDao<LabTestActionLogDao ,Integer>{
+import org.zju.clever.processdata.view.model.LabTestActionLog;
+
+public interface LabTestActionLogDao extends GenericDao<LabTestActionLog ,Integer>{
 
 }
