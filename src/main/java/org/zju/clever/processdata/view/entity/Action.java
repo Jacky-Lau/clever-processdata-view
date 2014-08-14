@@ -6,7 +6,7 @@ public class Action {
 
 	private Integer actionId;
 	private String actorName;
-	private String actionName;
+	private String actionType;
 	private Calendar actionDateTime;
 
 	public Integer getActionId() {
@@ -17,12 +17,12 @@ public class Action {
 		this.actionId = actionId;
 	}
 
-	public String getActionName() {
-		return actionName;
+	public String getActionType() {
+		return actionType;
 	}
 
-	public void setActionName(String actionName) {
-		this.actionName = actionName;
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 
 	public String getActorName() {
