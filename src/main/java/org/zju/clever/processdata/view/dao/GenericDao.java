@@ -2,14 +2,34 @@ package org.zju.clever.processdata.view.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
+@SuppressWarnings({ "rawtypes" })
 public interface GenericDao<T, ID extends Serializable> {
+
+	public void save(T entity);
+
+	public void update(T entity);
+
+	public void saveOrUpdate(T entity);
+
+	public void delete(ID id);
+
+	public void delete(T entity);
+
 	public T findById(ID id);
 
-	@SuppressWarnings("rawtypes")
 	public List findByHQL(String hql, Object... params);
+
+	public List findByHQL(String hql, Map<String, ?> map);
 	
 	public List<T> selectAll();
 
 	public T findUniqueByProperty(String propertyName, Object value);
+
+	public List<T> selectAll(String[] fetchFields);
+
+	public List<T> selectAll(boolean fetchAll);
+
+	public List<T> findByProperty(Object... params);
 }
