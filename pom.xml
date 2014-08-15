@@ -138,6 +138,9 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
+					<url>http://172.16.100.54:8080/processData</url>
+					<username>admin</username>
+					<password>admin</password>
 					<path>/</path>
 					<charset>${project.build.sourceEncoding}</charset>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
