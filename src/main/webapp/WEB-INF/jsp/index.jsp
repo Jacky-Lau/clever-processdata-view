@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 	<body>
 		<div class="w">
 			<div class="breadcrumb">
-				<strong>过程数据</strong><span>&nbsp;&gt;&nbsp;检查&nbsp;&gt;&nbsp;检查申请单号：ER4567<span></span></span>
+				<strong>过程数据</strong><span>&nbsp;&gt;&nbsp;${type}&nbsp;&gt;&nbsp;数据索引号：${dataIndex}<span></span></span>
 			</div>
 			<div class="m" id="orderstate">
 				<div class="mt">

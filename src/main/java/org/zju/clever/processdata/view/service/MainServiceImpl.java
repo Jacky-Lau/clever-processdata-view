@@ -18,6 +18,7 @@ import org.zju.clever.processdata.view.dao.LabTestActionLogDao;
 import org.zju.clever.processdata.view.dao.OperationActionLogDao;
 import org.zju.clever.processdata.view.dao.OrderActionLogDao;
 import org.zju.clever.processdata.view.dao.PatientIndexDao;
+import org.zju.clever.processdata.view.dao.PrescActionLogDao;
 import org.zju.clever.processdata.view.entity.Action;
 import org.zju.clever.processdata.view.model.ActionClinicDict;
 import org.zju.clever.processdata.view.model.EMRActionLog;
@@ -49,7 +50,9 @@ public class MainServiceImpl implements MainService {
 	private OperationActionLogDao operationActionLogDao;
 	@Resource(name = "orderActionLogDao")
 	private OrderActionLogDao orderActionLogDao;
-
+	@Resource(name="prescActionLogDao")
+	private PrescActionLogDao prescActionLogDao;
+	
 	@Override
 	public PatientIndex getPatientIndexById(String id) {
 		return this.patientIndexDao.findUniqueByProperty("patientId", id);
@@ -83,7 +86,7 @@ public class MainServiceImpl implements MainService {
 	public List<Action> getEMRFirstPageActions(String id) {
 		Map<String, Integer> model = new HashMap<String, Integer>();
 		model.put("emrFirstPageId", Integer.valueOf(id));
-		List<EMRFirstPageActionLog> logs = this.emrActionLogDao
+		List<EMRFirstPageActionLog> logs = this.emrFirstPageActionLogDao
 				.findByHQL(
 						"from EMRFirstPageActionLog log where log.emrFirstPageId = :emrFirstPageId",
 						model);
@@ -199,7 +202,7 @@ public class MainServiceImpl implements MainService {
 	public List<Action> getPrescActions(String id) {
 		Map<String, Integer> model = new HashMap<String, Integer>();
 		model.put("prescId", Integer.valueOf(id));
-		List<PrescActionLog> logs = this.orderActionLogDao.findByHQL(
+		List<PrescActionLog> logs = this.prescActionLogDao.findByHQL(
 				"from PrescActionLog log where log.prescId = :prescId", model);
 		return logs
 				.stream()

@@ -15,6 +15,7 @@
 		<!-- version -->
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
+		<log4j.version>1.2.14</log4j.version>
 	</properties>
 
 	<dependencies>
@@ -101,6 +102,11 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
+			<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>clever-processdata-view</finalName>
@@ -133,21 +139,22 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<plugins>
+	 	<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
-					<url>http://172.16.100.54:8080/processData</url>
+					<url>http://172.16.100.63:9097/manager/text</url>
 					<username>admin</username>
 					<password>admin</password>
-					<path>/</path>
+					<path>/processData</path>
 					<charset>${project.build.sourceEncoding}</charset>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
-					<port>8080</port>
+					<port>9097</port>
 				</configuration>
 			</plugin>
 		</plugins>
+		
 	</build>
 
 </project>
